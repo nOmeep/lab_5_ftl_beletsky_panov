@@ -67,14 +67,14 @@ class SettingsReader {
         private const val DEFAULT_SETTINGS_FILE_NAME = "src/syntax.txt"
         private const val DEFAULT_SEPARATOR = "="
 
-        private const val DEFAULT_NON_TERMINAL_START = "["
-        private const val DEFAULT_NON_TERMINAL_END = "]"
+        private const val DEFAULT_NON_TERMINAL_START = "_"
+        private const val DEFAULT_NON_TERMINAL_END = "_"
         private const val DEFAULT_ARROW = "::="
         private const val DEFAULT_EPSILON = "e"
-        private const val DEFAULT_ITER_START = ""
-        private const val DEFAULT_ITER_END = ""
-        private const val DEFAULT_OPTIONAL_ENTER_START = "{"
-        private const val DEFAULT_OPTIONAL_ENTER_END = "}"
+        private const val DEFAULT_ITER_START = "{"
+        private const val DEFAULT_ITER_END = "}"
+        private const val DEFAULT_OPTIONAL_ENTER_START = "["
+        private const val DEFAULT_OPTIONAL_ENTER_END = "]"
         private const val DEFAULT_ALTERNATIVE = "|"
     }
 }
