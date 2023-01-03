@@ -23,9 +23,20 @@ class SettingsReader {
      * Возвращает параметры, прочитанные из файла syntax.txt;
      * если что-то пошло не так, то отдает дефолтные параметры
      */
-    fun readSyntax(): MutableMap<String, String> {
+    fun readSyntax(): SettingsModel {
         safeReadSyntax()
-        return nameToValueMap
+
+        return SettingsModel(
+            nonTerminalStart = nameToValueMap[NON_TERMINAL_START_KEY]!!,
+            nonTerminalEnd = nameToValueMap[NON_TERMINAL_END_KEY]!!,
+            arrow = nameToValueMap[ARROW_KEY]!!,
+            epsilon = nameToValueMap[EPSILON_KEY]!!,
+            iterStart = nameToValueMap[ITER_START_KEY]!!,
+            iterEnd = nameToValueMap[ITER_END_KEY]!!,
+            optionalEnterStart = nameToValueMap[OPTIONAL_ENTER_START_KEY]!!,
+            optionalEnterEnd = nameToValueMap[OPTIONAL_ENTER_END_KEY]!!,
+            alternative = nameToValueMap[ALTERNATIVE_KEY]!!
+        )
     }
 
     private fun safeReadSyntax() {
@@ -43,7 +54,6 @@ class SettingsReader {
         }
     }
 
-    @Throws(IllegalStateException::class)
     private fun readSetting(line: String) {
         val noWhitespaceLine = line.filter { character -> !character.isWhitespace() }
 
@@ -76,5 +86,15 @@ class SettingsReader {
         private const val DEFAULT_OPTIONAL_ENTER_START = "["
         private const val DEFAULT_OPTIONAL_ENTER_END = "]"
         private const val DEFAULT_ALTERNATIVE = "|"
+
+        private const val NON_TERMINAL_START_KEY = "_"
+        private const val NON_TERMINAL_END_KEY = "_"
+        private const val ARROW_KEY = "::="
+        private const val EPSILON_KEY = "e"
+        private const val ITER_START_KEY = "{"
+        private const val ITER_END_KEY = "}"
+        private const val OPTIONAL_ENTER_START_KEY = "["
+        private const val OPTIONAL_ENTER_END_KEY = "]"
+        private const val ALTERNATIVE_KEY = "|"
     }
 }
