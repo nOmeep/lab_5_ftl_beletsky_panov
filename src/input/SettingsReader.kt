@@ -87,14 +87,14 @@ class SettingsReader {
         private const val DEFAULT_OPTIONAL_ENTER_END = "]"
         private const val DEFAULT_ALTERNATIVE = "|"
 
-        private const val NON_TERMINAL_START_KEY = "_"
-        private const val NON_TERMINAL_END_KEY = "_"
-        private const val ARROW_KEY = "::="
-        private const val EPSILON_KEY = "e"
-        private const val ITER_START_KEY = "{"
-        private const val ITER_END_KEY = "}"
-        private const val OPTIONAL_ENTER_START_KEY = "["
-        private const val OPTIONAL_ENTER_END_KEY = "]"
-        private const val ALTERNATIVE_KEY = "|"
+        private const val NON_TERMINAL_START_KEY = "NStart"
+        private const val NON_TERMINAL_END_KEY = "NEnd"
+        private const val ARROW_KEY = "Arrow"
+        private const val EPSILON_KEY = "Epsilon"
+        private const val ITER_START_KEY = "IterStart"
+        private const val ITER_END_KEY = "IterEnd"
+        private const val OPTIONAL_ENTER_START_KEY = "OptionalEnterStart"
+        private const val OPTIONAL_ENTER_END_KEY = "OptionalEnterEnd"
+        private const val ALTERNATIVE_KEY = "Alternative"
     }
 }
