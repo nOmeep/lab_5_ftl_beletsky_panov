@@ -1,3 +1,1 @@
-NStart = test1
-NEnd = test2
 WRONGPARAM = SoMeThInG

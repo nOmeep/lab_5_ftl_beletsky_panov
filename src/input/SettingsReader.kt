@@ -16,6 +16,8 @@ class SettingsReader {
         "IterEnd" to DEFAULT_ITER_END,
         "OptionalEnterStart" to DEFAULT_OPTIONAL_ENTER_START,
         "OptionalEnterEnd" to DEFAULT_OPTIONAL_ENTER_END,
+        "NecessarilyStart" to DEFAULT_NECESSARILY_START,
+        "NecessarilyEnd" to DEFAULT_NECESSARILY_END,
         "Alternative" to DEFAULT_ALTERNATIVE
     )
 
@@ -35,6 +37,8 @@ class SettingsReader {
             iterEnd = nameToValueMap[ITER_END_KEY]!!,
             optionalEnterStart = nameToValueMap[OPTIONAL_ENTER_START_KEY]!!,
             optionalEnterEnd = nameToValueMap[OPTIONAL_ENTER_END_KEY]!!,
+            necessarilyStart = nameToValueMap[NECESSARILY_START_KEY]!!,
+            necessarilyEnd = nameToValueMap[NECESSARILY_END_KEY]!!,
             alternative = nameToValueMap[ALTERNATIVE_KEY]!!
         )
     }
@@ -85,6 +89,8 @@ class SettingsReader {
         private const val DEFAULT_ITER_END = "}"
         private const val DEFAULT_OPTIONAL_ENTER_START = "["
         private const val DEFAULT_OPTIONAL_ENTER_END = "]"
+        private const val DEFAULT_NECESSARILY_START = "("
+        private const val DEFAULT_NECESSARILY_END = ")"
         private const val DEFAULT_ALTERNATIVE = "|"
 
         private const val NON_TERMINAL_START_KEY = "NStart"
@@ -95,6 +101,8 @@ class SettingsReader {
         private const val ITER_END_KEY = "IterEnd"
         private const val OPTIONAL_ENTER_START_KEY = "OptionalEnterStart"
         private const val OPTIONAL_ENTER_END_KEY = "OptionalEnterEnd"
+        private const val NECESSARILY_START_KEY = "NecessarilyStart"
+        private const val NECESSARILY_END_KEY = "NecessarilyEnd"
         private const val ALTERNATIVE_KEY = "Alternative"
     }
 }
