@@ -9,5 +9,7 @@ data class SettingsModel(
     val iterEnd: String,
     val optionalEnterStart: String,
     val optionalEnterEnd: String,
+    val necessarilyStart: String,
+    val necessarilyEnd: String,
     val alternative: String
 )
