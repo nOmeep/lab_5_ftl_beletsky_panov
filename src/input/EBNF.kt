@@ -1,9 +1,7 @@
 package input
 
-class EBNF(
-        val name: String,
-        val rules: MutableList<EBNF>,
-        val nonParsedRules: String,
-        val ready: Boolean,
-        val type: String
+data class EBNF(
+    val name: String,
+    val nonParsedRules: String,
+    val type: String
 )
