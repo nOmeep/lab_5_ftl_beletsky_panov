@@ -1,4 +1,4 @@
-NStart = _
-NEnd = _
+NStart = __
+NEnd = __
 Epsilon = $
 Arrow = :=

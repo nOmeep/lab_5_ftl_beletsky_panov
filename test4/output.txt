@@ -1,0 +1,4 @@
+[Nonterm0] -> cd | e
+[Nonterm1] -> ab[Nonterm1] | e
+[Nonterm2] -> [Nonterm0][Nonterm2] | e
+[S] -> [Nonterm1][Nonterm2]

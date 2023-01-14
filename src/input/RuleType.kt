@@ -22,33 +22,30 @@ sealed class RuleType(
 
     private fun splitNonTerminals(nonParsedRule: String): String {
         val globalSb = StringBuilder()
+
+        println(nonParsedRule.replace(oldValue = settings.nonTerminalEnd, " "))
+
         var index = 0
         while (index != nonParsedRule.length) {
-            val currentSymbol = nonParsedRule[index++]
 
-            when (currentSymbol.toString()) {
-                settings.nonTerminalStart -> {
-                    val sb = StringBuilder()
+            when (val currentSymbol = nonParsedRule[index]) {
+                settings.nonTerminalStart[0] -> {
+                    if (nonParsedRule.substring(index, index + settings.nonTerminalStart.length) == settings.nonTerminalStart) {
+                        index += settings.nonTerminalStart.length
 
-                    while (index != nonParsedRule.length && nonParsedRule[index].toString() != settings.nonTerminalEnd) {
-                        val symbol = nonParsedRule[index++]
-                        sb.append(symbol)
+                        globalSb.append("[")
+                        val after = nonParsedRule.substring(index, nonParsedRule.length)
+
+                        val before = after.substringBefore(settings.nonTerminalEnd).ifBlank {
+                            after[0] + after.substring(1, after.length).substringBefore(settings.nonTerminalEnd)
+                        }
+                        index += before.length + settings.nonTerminalEnd.length
+                        globalSb.append(before)
+
+                        globalSb.append("]")
                     }
-
-                    if (index == nonParsedRule.length) {
-                        throw IllegalStateException("Закрывающий символ в отсутствии открывающего")
-                    }
-
-                    globalSb.append("[")
-                    globalSb.append(sb)
-                    globalSb.append("]")
-
-                    index++
                 }
-                settings.nonTerminalEnd -> {
-                    throw IllegalStateException("Закрывающий символ в отсутствии открывающего")
-                }
-                "\"" -> {
+                '"' -> {
                     val sb = StringBuilder()
 
                     while (index != nonParsedRule.length && nonParsedRule[index].toString() != "\"") {
@@ -65,6 +62,7 @@ sealed class RuleType(
                 }
                 else -> {
                     globalSb.append(currentSymbol)
+                    index++
                 }
             }
         }
