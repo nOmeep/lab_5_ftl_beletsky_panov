@@ -1,5 +1,4 @@
-import input.EBNF
-import input.SettingsModel
+package input
 
 class ContextFreeResolver(
     private val settings: SettingsModel,

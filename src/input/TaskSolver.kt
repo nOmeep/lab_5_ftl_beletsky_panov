@@ -1,5 +1,4 @@
-import input.Parser
-import input.SettingsReader
+package input
 
 class TaskSolver {
     fun solve() {

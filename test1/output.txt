@@ -1,0 +1,4 @@
+[Nonterm0] -> [S][Nonterm0] | $
+[Nonterm1] -> a[Nonterm0] | $
+[K] -> [Nonterm1] | $ | b
+[S] -> c | $

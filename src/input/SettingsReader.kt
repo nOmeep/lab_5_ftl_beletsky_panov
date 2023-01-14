@@ -62,7 +62,7 @@ class SettingsReader {
         val noWhitespaceLine = line.filter { character -> !character.isWhitespace() }
 
         val (name, value) = try {
-            noWhitespaceLine.split(DEFAULT_SEPARATOR)
+            noWhitespaceLine.split(DEFAULT_SEPARATOR, limit = 2)
         } catch (e: Exception) {
             println("Не удалось распарсить строку:\n\t$line")
             return

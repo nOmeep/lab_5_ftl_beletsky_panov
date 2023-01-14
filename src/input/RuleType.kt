@@ -1,5 +1,4 @@
-import input.EBNF
-import input.SettingsModel
+package input
 
 sealed class RuleType(
     protected val settings: SettingsModel
@@ -65,7 +64,7 @@ sealed class RuleType(
                     index++
                 }
                 else -> {
-                    throw IllegalStateException("Неожиданный поворот событий")
+                    globalSb.append(currentSymbol)
                 }
             }
         }

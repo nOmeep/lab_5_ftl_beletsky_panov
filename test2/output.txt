@@ -1,0 +1,9 @@
+[Nonterm0] -> + | - | e
+[Nonterm1] -> [НатЧисло] | e
+[Nonterm2] -> .[Nonterm1] | e
+[Nonterm3] -> e | E
+[Nonterm4] -> [Nonterm3][Nonterm0][НатЧисло] | e
+[Число] -> [Nonterm0][НатЧисло][Nonterm2][Nonterm4]
+[Nonterm5] -> [Цифра][Nonterm5] | e
+[НатЧисло] -> [Цифра][Nonterm5]
+[Цифра] -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
