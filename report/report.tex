@@ -1,0 +1,102 @@
+\documentclass{article}
+
+\usepackage[english, russian]{babel}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{latexsym, amsmath, amssymb}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{listings}
+\lstset{language=C, extendedchars=\true}
+
+\title{Лабораторная работа №5}
+\author{Белецкий\\ Панов}
+\date{Декабрь 2022}
+
+\begin{document}
+\maketitle
+
+\section{Описание}
+Преобразование синтаксиса, записанного в РБНФ в КС-грамматику
+
+\section{Запуск программы}
+
+\begin{enumerate}
+  \item Необходимо клонировать репозиторий проекта при помощи команды
+  \begin{lstlisting}
+    git clone
+    \end{lstlisting}
+  \item В папке src находится файл main.kt с main функцией программы. Через файл main.kt проиходит запуск программы.
+\end{enumerate}
+
+\section{Настройки файла syntax.txt}
+Перед вводом данных необходимо внести изменения в файл `syntax.txt`, лежащий внутри папки проекта.
+Внутри файла можно задавать конфигурацию следующих параметров:
+\begin{itemize}
+  \item NStart - символ начала нетерминала. Значение по умолчанию: "\_"
+  \item NEnd - символ конца нетерминала. Значение по умолчанию: "\_"
+  \item `Arrow` - строка-разделитель для имени нетерминала и его значения. Значение по умолчанию: "::="
+  \item `Epsilon` - символ пустого символа. Значение по умолчанию: "\$"
+  \item IterStart - символ начала итерации. Значение по умолчанию: "\{"
+  \item IterEnd - символ конца итерации. Значение по умолчанию: "\}"
+  \item OptionalEnterStart - символ начала условного вхождения. Значение по умолчанию: "[" (Открывающая квадратная скобка)
+  \item OptionalEnterEnd - символ конца условного вхождения. Значение по умолчанию: "]" (закрывающая квадратная скобка)
+  \item NecessarilyStart - символ начала группировки элементов для обязательного вхождения. Значение по умолчанию: "("
+  \item NecessarilyEnd - символ конца группировки элементов для обязательного вхождения. Значение по умолчанию: ")"
+  \item Alternative - символ-разделитель правил или "альтернатива". Значение по умолчанию: "\|"
+
+\end{itemize}
+
+Правила задания параметров:
+
+\begin{enumerate}
+  \item Каждый новый параметр начинается с новой строчки. Значение задается через символ `=`. Пример задания параметра:
+  \begin{lstlisting}
+    Arrow = ::=
+    \end{lstlisting}
+  \item Если в файле указать несуществующий параметр, то он проигнорируется. Пример несуществующего параметра:
+  \begin{lstlisting}
+    MY_CUSTOM_PARAM = @
+    \end{lstlisting}
+  \item Если неправильно записать параметр, в выводе появится соответствующая строка, для параметра будет использоваться значение по умолчанию.
+Пример сообщения об ошибке:
+    \begin{lstlisting}
+    Error while parsing string: "Arrow != -->"
+    \end{lstlisting}
+\item Если не указать какой-либо существующий параметр, выберется значение по умолчанию.
+\item Имена различных параметров не должны совпадать, за исключением тех, что представляют собой, например, открывающий и закрывающий символы.
+Так параметры NStart и NEnd могут совпадать, а NStart и NecessarilyStart нет.
+\end{enumerate}
+
+\section{Тесты}
+Вместе с файлами программы в проекте лежат файлы тестов в папках testN. Внтури есть необходимые параметры для файла syntax.txt,
+вводимые строки, соответствующие параметрам из файла syntax.txt, а также ожидаемый вывод программы при заданных входных данных и параметрах. Использование теста на примере теста из папки test2:
+\begin{enumerate}
+  \item Скопировать содержимое файла test2/syntax.txt в src/syntax.txt
+  \begin{lstlisting}
+    DEFAULT_SETTINGS = true
+    \end{lstlisting}
+  \item В строку ввода ввести содержимое файла input.txt
+  \begin{lstlisting}
+    _Number_ ::= ["+"|"-"]_NaturalNumber_["."[_NaturalNumber_]][("e"|"E")["+"|"-"]_NaturalNumber_]
+    _NaturalNumber_ ::= _Digit_{_Digit_}
+    _Digit_ ::= "0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"
+    \end{lstlisting}
+  \item Так как ввод строк завершается после ввода пустой строки, то вводим ее и получаем на выходе преобразование
+    \begin{lstlisting}
+    [Nonterm0] -> + | - | e
+    [Nonterm1] -> [NaturalNumber] | e
+    [Nonterm2] -> .[Nonterm1] | e
+    [Nonterm3] -> e | E
+    [Nonterm4] -> [Nonterm3][Nonterm0][NaturalNumber] | e
+    [Number] -> [Nonterm0][NaturalNumber][Nonterm2][Nonterm4]
+    [Nonterm5] -> [Digit][Nonterm5] | e
+    [NaturalNumber] -> [Digit][Nonterm5]
+    [Digit] -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+    \end{lstlisting}
+\end{enumerate}
+
+Вместе с выводом дополнительно выводится отладочная информация, однако результат выполнения программы находится в самом конце вывода после строки "КС вид:"
+\end{document}
